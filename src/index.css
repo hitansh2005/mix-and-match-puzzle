@@ -8,35 +8,58 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Playful puzzle game colors */
+    --background: 245 100% 97%;
+    --foreground: 230 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 230 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 230 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Fun primary colors - bright purple */
+    --primary: 260 100% 65%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 260 100% 75%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Warm orange secondary */
+    --secondary: 25 100% 60%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Soft backgrounds */
+    --muted: 240 20% 96%;
+    --muted-foreground: 230 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Success green */
+    --accent: 140 60% 55%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Playful warning */
+    --destructive: 15 90% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 240 20% 90%;
+    --input: 240 20% 95%;
+    --ring: 260 100% 65%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
+
+    /* Game-specific colors */
+    --game-bg: 220 25% 96%;
+    --piece-shadow: 230 20% 80%;
+    --piece-active: 260 100% 85%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(25 100% 70%));
+    --gradient-success: linear-gradient(135deg, hsl(var(--accent)), hsl(140 60% 65%));
+    --gradient-bg: linear-gradient(180deg, hsl(var(--background)), hsl(var(--game-bg)));
+    
+    /* Shadows */
+    --shadow-piece: 0 4px 12px hsl(var(--piece-shadow) / 0.15);
+    --shadow-active: 0 8px 24px hsl(var(--primary) / 0.25);
+    --shadow-button: 0 4px 16px hsl(var(--primary) / 0.2);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +124,81 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-bg);
+    font-family: 'Comic Neue', 'Fredoka One', cursive, system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* Game piece animations */
+  .piece-flip {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+  
+  .piece-flip.flipped {
+    transform: rotateY(180deg);
+  }
+  
+  .piece-face {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  .piece-back {
+    transform: rotateY(180deg);
+  }
+  
+  /* Button animations */
+  .game-button {
+    @apply transition-all duration-300 ease-out;
+    box-shadow: var(--shadow-button);
+  }
+  
+  .game-button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-active);
+  }
+  
+  .game-button:active {
+    transform: translateY(0) scale(0.98);
+  }
+  
+  /* Puzzle piece styles */
+  .puzzle-piece {
+    @apply cursor-grab transition-all duration-300;
+    box-shadow: var(--shadow-piece);
+    border-radius: 12px;
+  }
+  
+  .puzzle-piece:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-active);
+  }
+  
+  .puzzle-piece.dragging {
+    @apply cursor-grabbing;
+    transform: scale(1.1) rotate(5deg);
+    z-index: 1000;
+  }
+  
+  .puzzle-piece.active {
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.5);
+  }
+  
+  /* Celebration animation */
+  @keyframes celebrate {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(-5deg); }
+    75% { transform: scale(1.1) rotate(5deg); }
+  }
+  
+  .celebrate {
+    animation: celebrate 0.8s ease-in-out;
+  }
+  
+  /* Smooth puzzle solve animation */
+  .solving-piece {
+    transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
