@@ -79,8 +79,8 @@ export const PuzzleGame = () => {
     const rows = 6;
     
     for (let i = 0; i < 48; i++) {
-      const correctX = (i % cols) * 100;
-      const correctY = Math.floor(i / cols) * 100;
+      const correctX = (i % cols) * 80;
+      const correctY = Math.floor(i / cols) * 80;
       
       newPieces.push({
         id: i,
@@ -157,7 +157,7 @@ export const PuzzleGame = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-6">
           <h1 className="text-4xl font-bold text-primary mb-2" style={{ fontFamily: 'Fredoka One' }}>
-            Flip & Fit Puzzle
+            CoDi's Mix & Match Puzzle
           </h1>
           <p className="text-lg text-muted-foreground">
             Playing: <span className="text-primary font-semibold">{selectedTheme.name}</span>

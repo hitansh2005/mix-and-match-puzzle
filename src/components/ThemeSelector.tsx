@@ -12,7 +12,7 @@ export const ThemeSelector = ({ themes, onThemeSelect }: ThemeSelectorProps) => 
     <div className="w-full max-w-4xl mx-auto">
       <div className="text-center mb-8">
         <h1 className="text-5xl font-bold text-primary mb-4" style={{ fontFamily: 'Fredoka One' }}>
-          Flip & Fit Puzzle
+          CoDi's Mix & Match Puzzle
         </h1>
         <p className="text-xl text-muted-foreground">
           Choose your puzzle theme and start the fun!

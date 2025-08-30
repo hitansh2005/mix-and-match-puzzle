@@ -120,7 +120,7 @@ export const PuzzlePiece = ({ piece, onMove, onFlip }: PuzzlePieceProps) => {
     >
       <div className={`piece-flip w-full h-full relative ${piece.isFlipped ? 'flipped' : ''}`}>
         {/* Front face */}
-        <div className="piece-face absolute inset-0 bg-white rounded-lg border-2 border-primary/20 overflow-hidden">
+        <div className="piece-face absolute inset-0 bg-white rounded-sm overflow-hidden">
           <img
             src={piece.frontImage}
             alt={`Puzzle piece ${piece.id}`}
@@ -133,7 +133,7 @@ export const PuzzlePiece = ({ piece, onMove, onFlip }: PuzzlePieceProps) => {
         </div>
         
         {/* Back face */}
-        <div className="piece-face piece-back absolute inset-0 bg-secondary rounded-lg border-2 border-secondary/20 overflow-hidden">
+        <div className="piece-face piece-back absolute inset-0 bg-secondary rounded-sm overflow-hidden">
           <img
             src={piece.backImage}
             alt={`Puzzle piece ${piece.id} back`}
